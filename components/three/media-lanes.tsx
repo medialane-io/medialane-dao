@@ -3,6 +3,7 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { colors } from '@/lib/site-config'
 
 function createLaneCurve(seed: number): THREE.CatmullRomCurve3 {
   const points: THREE.Vector3[] = []
@@ -98,13 +99,13 @@ function MediaLane({ seed, color, speed, tubeRadius = 0.02 }: MediaLaneProps) {
 }
 
 const LANES = [
-  { seed: 0.3, color: '#0000FF', speed: 0.8, tubeRadius: 0.025 },
-  { seed: 1.7, color: '#EC796B', speed: 0.6, tubeRadius: 0.02 },
-  { seed: 2.9, color: '#E175B1', speed: 1.0, tubeRadius: 0.018 },
-  { seed: 4.2, color: '#0000FF', speed: 0.5, tubeRadius: 0.022 },
-  { seed: 5.5, color: '#EC796B', speed: 0.7, tubeRadius: 0.015 },
-  { seed: 6.8, color: '#E175B1', speed: 0.9, tubeRadius: 0.02 },
-  { seed: 8.1, color: '#0000FF', speed: 0.4, tubeRadius: 0.028 },
+  { seed: 0.3, color: colors.primary, speed: 0.8, tubeRadius: 0.025 },
+  { seed: 1.7, color: colors.secondary, speed: 0.6, tubeRadius: 0.02 },
+  { seed: 2.9, color: colors.accent, speed: 1.0, tubeRadius: 0.018 },
+  { seed: 4.2, color: colors.primary, speed: 0.5, tubeRadius: 0.022 },
+  { seed: 5.5, color: colors.secondary, speed: 0.7, tubeRadius: 0.015 },
+  { seed: 6.8, color: colors.accent, speed: 0.9, tubeRadius: 0.02 },
+  { seed: 8.1, color: colors.primary, speed: 0.4, tubeRadius: 0.028 },
 ]
 
 export function MediaLanes() {

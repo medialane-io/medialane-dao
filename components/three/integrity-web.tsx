@@ -3,6 +3,7 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { colors } from '@/lib/site-config'
 
 interface Node {
   position: THREE.Vector3
@@ -44,8 +45,10 @@ export function IntegrityWeb() {
   const pointsRef = useRef<THREE.Points>(null)
   const linesRef = useRef<THREE.LineSegments>(null)
 
-  const { nodes, nodePositions, linePositions, lineCount } = useMemo(() => {
+  const { nodes, nodePositions, linePositions, lineCount, edgeIndices } = useMemo(() => {
     const n = generateNetwork(80, 5, 2.5)
+
+    // flatten node positions once
     const nPos = new Float32Array(n.length * 3)
     n.forEach((node, i) => {
       nPos[i * 3] = node.position.x
@@ -53,23 +56,42 @@ export function IntegrityWeb() {
       nPos[i * 3 + 2] = node.position.z
     })
 
-    // Build line segments
-    const segments: number[] = []
-    const visited = new Set<string>()
+    // Build a list of unique edges (pairs of indices) and initial line buffer
+    const edges: [number, number][] = []
     n.forEach((node, i) => {
       node.connections.forEach((j) => {
-        const key = `${Math.min(i, j)}-${Math.max(i, j)}`
-        if (!visited.has(key)) {
-          visited.add(key)
-          segments.push(
-            node.position.x, node.position.y, node.position.z,
-            n[j].position.x, n[j].position.y, n[j].position.z
-          )
+        if (i < j) {
+          edges.push([i, j])
         }
       })
     })
-    const lPos = new Float32Array(segments)
-    return { nodes: n, nodePositions: nPos, linePositions: lPos, lineCount: segments.length / 6 }
+
+    const segments = new Float32Array(edges.length * 6)
+    edges.forEach(([i, j], k) => {
+      const a = n[i].position
+      const b = n[j].position
+      const offset = k * 6
+      segments[offset] = a.x
+      segments[offset + 1] = a.y
+      segments[offset + 2] = a.z
+      segments[offset + 3] = b.x
+      segments[offset + 4] = b.y
+      segments[offset + 5] = b.z
+    })
+
+    const idxArray = new Uint16Array(edges.length * 2)
+    edges.forEach(([i, j], k) => {
+      idxArray[k * 2] = i
+      idxArray[k * 2 + 1] = j
+    })
+
+    return {
+      nodes: n,
+      nodePositions: nPos,
+      linePositions: segments,
+      lineCount: edges.length,
+      edgeIndices: idxArray,
+    }
   }, [])
 
   useFrame((state) => {
@@ -90,20 +112,15 @@ export function IntegrityWeb() {
 
     if (linesRef.current) {
       const positions = linesRef.current.geometry.attributes.position
-      let idx = 0
-      const visited = new Set<string>()
-      nodes.forEach((node, i) => {
-        node.connections.forEach((j) => {
-          const key = `${Math.min(i, j)}-${Math.max(i, j)}`
-          if (!visited.has(key)) {
-            visited.add(key)
-            const pA = pointsRef.current!.geometry.attributes.position
-            positions.setXYZ(idx * 2, pA.getX(i), pA.getY(i), pA.getZ(i))
-            positions.setXYZ(idx * 2 + 1, pA.getX(j), pA.getY(j), pA.getZ(j))
-            idx++
-          }
-        })
-      })
+      const pA = pointsRef.current!.geometry.attributes.position
+      const edges = edgeIndices
+      // edges stored as [i0,j0,i1,j1,...]
+      for (let k = 0; k < edges.length; k += 2) {
+        const i = edges[k]
+        const j = edges[k + 1]
+        positions.setXYZ(k, pA.getX(i), pA.getY(i), pA.getZ(i))
+        positions.setXYZ(k + 1, pA.getX(j), pA.getY(j), pA.getZ(j))
+      }
       positions.needsUpdate = true
     }
 
@@ -125,7 +142,7 @@ export function IntegrityWeb() {
           />
         </bufferGeometry>
         <pointsMaterial
-          color="#0000FF"
+          color={colors.primary}
           size={0.1}
           transparent
           opacity={0.8}
@@ -142,7 +159,7 @@ export function IntegrityWeb() {
           />
         </bufferGeometry>
         <lineBasicMaterial
-          color="#0000FF"
+          color={colors.primary}
           transparent
           opacity={0.15}
         />

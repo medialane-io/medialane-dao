@@ -7,6 +7,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { SceneController } from './scene-controller'
 import { MediaLanes } from './media-lanes'
 import { IntegrityWeb } from './integrity-web'
+import { colors } from '@/lib/site-config'
 
 function SceneContent() {
   const { resolvedTheme } = useTheme()
@@ -19,12 +20,14 @@ function SceneContent() {
       <pointLight
         position={[5, 5, 5]}
         intensity={isDark ? 0.8 : 0.5}
-        color={isDark ? '#4444ff' : '#0000FF'}
+        // use primary color defined in the config; dark mode gets a slightly
+        // lighter variant so the scene doesn't turn completely blue.
+        color={isDark ? '#4444ff' : colors.primary}
       />
       <pointLight
         position={[-5, -3, 3]}
         intensity={0.4}
-        color="#EC796B"
+        color={colors.secondary}
       />
       <MediaLanes />
       <IntegrityWeb />

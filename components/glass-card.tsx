@@ -1,33 +1,31 @@
+import * as React from 'react'
+import { Card, CardProps } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
-interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
+interface GlassCardProps extends CardProps {
   intensity?: 'light' | 'medium' | 'heavy'
 }
 
-export function GlassCard({
-  children,
-  className,
-  intensity = 'medium',
-  ...props
-}: GlassCardProps) {
-  const blurMap = {
-    light: 'backdrop-blur-sm',
-    medium: 'backdrop-blur-md',
-    heavy: 'backdrop-blur-xl',
-  }
+export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
+  ({ intensity = 'medium', className, ...props }, ref) => {
+    const blurMap = {
+      light: 'backdrop-blur-sm',
+      medium: 'backdrop-blur-md',
+      heavy: 'backdrop-blur-xl',
+    }
 
-  return (
-    <div
-      className={cn(
-        'rounded-xl border border-ml-glass-border bg-ml-glass',
-        blurMap[intensity],
-        'shadow-lg transition-all duration-300',
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-}
+    return (
+      <Card
+        ref={ref}
+        className={cn(
+          'rounded-xl border border-ml-glass-border bg-ml-glass',
+          blurMap[intensity],
+          'shadow-lg transition-all duration-300',
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
+GlassCard.displayName = 'GlassCard'

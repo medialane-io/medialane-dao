@@ -8,7 +8,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <SceneCanvas />
       <SiteNav />
-      <main className="relative z-10 min-h-screen pb-20 lg:pb-0 lg:pr-20">
+      <main className="relative z-10 min-h-screen bg-background/80 lg:pb-0 lg:pr-20">
         {children}
       </main>
     </>

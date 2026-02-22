@@ -13,6 +13,8 @@ const _geistMono = Geist_Mono({
   variable: '--font-mono',
 })
 
+import { colors } from '@/lib/site-config'
+
 export const metadata: Metadata = {
   title: 'Medialane DAO | Integrity Web on Starknet',
   description:
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0000FF' },
+    { media: '(prefers-color-scheme: light)', color: colors.primary },
     { media: '(prefers-color-scheme: dark)', color: '#0C0C4F' },
   ],
   width: 'device-width',

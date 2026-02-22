@@ -2,47 +2,32 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Layers, Shield, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { GlassCard } from '@/components/glass-card'
+import { createContainerVariants, createItemVariants } from '@/lib/motion'
 
 const pillars = [
   {
     icon: Layers,
-    title: 'Media Lanes',
-    description: 'Decentralized content pathways verified on-chain.',
+    title: 'Creator Launchpad',
+    description: 'A platform for creators to launch and monetize their content.',
   },
   {
     icon: Shield,
-    title: 'Integrity Web',
-    description: 'A trust layer for media authenticity and provenance.',
+    title: 'NFT Marketplace',
+    description: 'A marketplace for creators to sell their digital assets.',
   },
   {
     icon: Globe,
-    title: 'Starknet Native',
-    description: 'Built on Starknet for scalable, transparent governance.',
+    title: 'Programmable IP',
+    description: 'Monetize and licensing intellectual property on-chain.',
   },
 ]
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-  },
-}
+const containerVariants = createContainerVariants(0.15, 0.3)
+const itemVariants = createItemVariants({ y: 30, blur: 8, duration: 0.7 })
 
 export function HeroSection() {
   return (
@@ -58,8 +43,7 @@ export function HeroSection() {
           variants={itemVariants}
           className="inline-flex items-center gap-2 rounded-full border border-ml-glass-border bg-ml-glass px-4 py-1.5 text-xs font-medium tracking-widest uppercase text-muted-foreground backdrop-blur-md"
         >
-          <span className="inline-block size-1.5 rounded-full bg-ml-orange" />
-          Decentralized Autonomous Organization
+          ORG | DAO
         </motion.div>
 
         {/* Title */}
@@ -67,7 +51,7 @@ export function HeroSection() {
           variants={itemVariants}
           className="text-balance text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
-          Media<span className="text-primary">lane</span>
+          <Image src="/medialane.png" alt="Medialane" width={300} height={62} className="inline-block" />
         </motion.h1>
 
         {/* Subtitle */}
@@ -75,8 +59,7 @@ export function HeroSection() {
           variants={itemVariants}
           className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
-          Digital media lanes in the integrity web. Decentralized governance for
-          a transparent media ecosystem on Starknet.
+          Monetization hub for the Integrity Web
         </motion.p>
 
         {/* CTA */}
