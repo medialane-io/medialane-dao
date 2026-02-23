@@ -1,3 +1,14 @@
+<img width="1280" height="640" alt="image" src="https://github.com/user-attachments/assets/7d2b5360-211e-40ac-9f41-a8595613c89f" />
+
+
+# Medialane DAO
+
+Monetization hub financial infrastructure for the Creators Capital Markets, with Creators Launchpad and IP Marketplace engineered for the integrity web, to enable trustless, verifiable financial activity. Medialane empowers creators, businesses, and AI to fully own, trade, and generate capital from intellectual property with sovereignty, control, and transparency.
+
+Visit [http://medialane.xyz](http://medialane.xyz) 
+
+- - -
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
