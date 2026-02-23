@@ -62,7 +62,7 @@ export function HeroSection() {
           Monetization hub for the Integrity Web
         </motion.p>
 
-        {/* CTA */}
+        {/* CTA 
         <motion.div variants={itemVariants} className="flex gap-3">
           <Button asChild size="lg" className="gap-2 shadow-lg shadow-ml-glow">
             <Link href="/explore">
@@ -73,7 +73,7 @@ export function HeroSection() {
           <Button asChild variant="outline" size="lg" className="border-ml-glass-border bg-ml-glass backdrop-blur-md">
             <Link href="/connect">Connect</Link>
           </Button>
-        </motion.div>
+        </motion.div>*/}
 
         {/* Pillar cards */}
         <motion.div

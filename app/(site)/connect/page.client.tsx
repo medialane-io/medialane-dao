@@ -20,9 +20,8 @@ const containerVariants = createContainerVariants()
 const itemVariants = createItemVariants()
 
 const socials = [
-  { name: 'Discord', href: '#', icon: MessageSquare },
-  { name: 'X / Twitter', href: '#', icon: ExternalLink },
-  { name: 'YouTube', href: '#', icon: Video },
+  { name: 'X / Twitter', href: 'https://x.com/medialane_xyz', icon: ExternalLink },
+  { name: 'YouTube', href: 'https://www.youtube.com/@medialanexyz', icon: Video },
   { name: 'Snapshot', href: '#', icon: Vote },
 ]
 
@@ -63,9 +62,7 @@ export default function ConnectPageClient() {
                 </div>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Connect your ArgentX or Braavos wallet to access governance,
-                member content, and the full Medialane experience. Wallet
-                integration powered by Starknet.
+                Connect your Ready or Braavos wallet to access the full Medialane DAO experience and content.
               </p>
               <Button
                 size="lg"
@@ -78,70 +75,27 @@ export default function ConnectPageClient() {
             </GlassCard>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Contact CTA */}
           <motion.div variants={itemVariants}>
-            <GlassCard intensity="medium" className="flex flex-col gap-6 p-6">
-              <div className="flex items-center gap-3">
+            <GlassCard intensity="medium" className="flex flex-col gap-6 p-6 text-center">
+              <div className="flex items-center justify-center gap-3">
                 <div className="flex size-10 items-center justify-center rounded-lg bg-ml-orange/10 text-ml-orange">
                   <Mail className="size-5" />
                 </div>
-                <div>
-                  <h2 className="text-lg font-semibold text-foreground">
-                    Get in Touch
-                  </h2>
-                  <p className="text-xs text-muted-foreground">
-                    We would love to hear from you
-                  </p>
-                </div>
+                <h2 className="text-lg font-semibold text-foreground">
+                  Email Us
+                </h2>
               </div>
-              <form
-                className="flex flex-col gap-4"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="name"
-                    className="text-xs font-medium text-foreground"
-                  >
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    className="w-full"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="email"
-                    className="text-xs font-medium text-foreground"
-                  >
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    className="w-full"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor="message"
-                    className="text-xs font-medium text-foreground"
-                  >
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    className="w-full"
-                    placeholder="What's on your mind?"
-                  />
-                </div>
-                <Button type="submit" className="self-end">
-                  Send
-                </Button>
-              </form>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                For general inquiries or support, reach out at{' '}
+                <a
+                  href="mailto:dao@mediolano.org"
+                  className="font-medium text-primary underline"
+                >
+                  dao@mediolano.org
+                </a>
+                . We look forward to connecting with you.
+              </p>
             </GlassCard>
           </motion.div>
         </div>
@@ -149,17 +103,21 @@ export default function ConnectPageClient() {
         {/* Social links */}
         <motion.div variants={itemVariants} className="mt-12">
           <h2 className="mb-4 text-xs font-semibold tracking-widest uppercase text-primary">
-            Find us on
+            Follow us
           </h2>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-6">
             {socials.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
-                className="flex items-center gap-2 text-sm text-primary hover:underline"
+                className="flex flex-col items-center gap-2 text-sm text-primary hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <social.icon className="size-4" />
-                {social.name}
+                <div className="rounded-full bg-primary/10 p-3">
+                  <social.icon className="size-6" />
+                </div>
+                <span className="mt-1">{social.name}</span>
               </a>
             ))}
           </div>
