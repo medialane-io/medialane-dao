@@ -5,7 +5,9 @@
 
 Monetization hub financial infrastructure for the Creators Capital Markets, with Creators Launchpad and IP Marketplace engineered for the integrity web, to enable trustless, verifiable financial activity. Medialane empowers creators, businesses, and AI to fully own, trade, and generate capital from intellectual property with sovereignty, control, and transparency.
 
-Visit [http://medialane.xyz](http://medialane.xyz) 
+Visit [http://medialane.org](http://medialane.org) 
+
+App [http://medialane.xyz](http://medialane.xyz) 
 
 - - -
 
