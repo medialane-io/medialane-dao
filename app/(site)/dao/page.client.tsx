@@ -4,13 +4,28 @@ import { motion } from 'framer-motion'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { GlassCard } from '@/components/glass-card'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import documents from '@/lib/dao-content'
+import { PageHeader } from '@/components/page-header'
 import { createContainerVariants, createItemVariants } from '@/lib/motion'
 
 const containerVariants = createContainerVariants()
 const itemVariants = createItemVariants()
 
-export default function DAOPageClient() {
+interface DAOPageClientProps {
+  documents: Record<string, { title: string; contentHtml: string }>
+}
+
+export default function DAOPageClient({ documents }: DAOPageClientProps) {
+  const documentKeys = Object.keys(documents)
+  const defaultTab = documentKeys.includes('foundation') ? 'foundation' : documentKeys[0]
+
+  if (documentKeys.length === 0) {
+    return (
+      <div className="flex min-h-screen flex-col px-4 py-20 lg:px-8">
+        <PageHeader title="DAO" description="No documentation found." />
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen flex-col px-4 py-20 lg:px-8">
       <motion.div
@@ -19,17 +34,15 @@ export default function DAOPageClient() {
         animate="visible"
         className="mx-auto w-full max-w-4xl"
       >
-        <motion.div variants={itemVariants} className="mb-8">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            DAO
-          </h1>
-          <p className="mt-3 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Foundation, governance, and the principles that guide us.
-          </p>
-        </motion.div>
+        <PageHeader
+          title="DAO"
+          description="Foundation, governance, and the principles that guide us."
+          containerVariants={containerVariants}
+          itemVariants={itemVariants}
+        />
 
         <motion.div variants={itemVariants}>
-          <Tabs defaultValue="foundation" className="w-full">
+          <Tabs defaultValue={defaultTab} className="w-full">
             <TabsList className="mb-6 flex w-full flex-wrap bg-ml-glass backdrop-blur-md border border-ml-glass-border">
               {Object.entries(documents).map(([key, doc]) => (
                 <TabsTrigger
@@ -45,20 +58,14 @@ export default function DAOPageClient() {
             {Object.entries(documents).map(([key, doc]) => (
               <TabsContent key={key} value={key}>
                 <GlassCard intensity="medium" className="p-6 sm:p-8">
-                  <h2 className="mb-4 text-2xl font-bold text-foreground">
+                  <h2 className="mb-6 text-2xl font-bold text-foreground border-b border-ml-glass-border pb-4">
                     {doc.title}
                   </h2>
-                  <ScrollArea className="h-[60vh]">
-                    <div className="prose prose-sm max-w-none dark:prose-invert">
-                      {doc.content.split('\n\n').map((paragraph, i) => (
-                        <p
-                          key={i}
-                          className="mb-4 text-sm leading-relaxed text-muted-foreground"
-                        >
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
+                  <ScrollArea className="h-[60vh] pr-4">
+                    <article
+                      className="prose max-w-none"
+                      dangerouslySetInnerHTML={{ __html: doc.contentHtml }}
+                    />
                   </ScrollArea>
                 </GlassCard>
               </TabsContent>

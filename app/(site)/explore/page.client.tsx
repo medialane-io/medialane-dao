@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { GlassCard } from '@/components/glass-card'
 import { Badge } from '@/components/ui/badge'
+import { PageHeader } from '@/components/page-header'
 import { createContainerVariants, createItemVariants } from '@/lib/motion'
 
 const features = [
@@ -110,14 +111,14 @@ export default function ExplorePageClient() {
         animate="visible"
         className="mx-auto w-full max-w-5xl"
       >
-        <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Explore
-          </h1>
-          <p className="mt-3 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Apps, features, and services powering the integrity web.
-          </p>
-        </motion.div>
+        <PageHeader
+          title="Explore"
+          description="Apps, features, and services powering the integrity web."
+          maxWidth="max-w-5xl"
+          containerVariants={containerVariants}
+          itemVariants={itemVariants}
+          className="mb-12"
+        />
 
         {features.map((section) => (
           <motion.div key={section.category} variants={itemVariants} className="mb-12">

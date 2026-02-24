@@ -1,13 +1,14 @@
+'use client'
+
 import * as React from 'react'
-import { Card, CardProps } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
-interface GlassCardProps extends CardProps {
+interface GlassCardProps extends React.ComponentProps<'div'> {
   intensity?: 'light' | 'medium' | 'heavy'
 }
 
 export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
-  ({ intensity = 'medium', className, ...props }, ref) => {
+  ({ intensity = 'medium', className, children, ...props }, ref) => {
     const blurMap = {
       light: 'backdrop-blur-sm',
       medium: 'backdrop-blur-md',
@@ -15,7 +16,7 @@ export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
     }
 
     return (
-      <Card
+      <div
         ref={ref}
         className={cn(
           'rounded-xl border border-ml-glass-border bg-ml-glass',
@@ -24,7 +25,9 @@ export const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(
           className
         )}
         {...props}
-      />
+      >
+        {children}
+      </div>
     )
   }
 )

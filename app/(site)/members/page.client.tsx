@@ -5,6 +5,7 @@ import { Lock, Wallet, Users, Crown, Star } from 'lucide-react'
 import { GlassCard } from '@/components/glass-card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { PageHeader } from '@/components/page-header'
 import { createContainerVariants, createItemVariants } from '@/lib/motion'
 
 const containerVariants = createContainerVariants()
@@ -40,14 +41,13 @@ export default function MembersPageClient() {
         animate="visible"
         className="mx-auto w-full max-w-4xl"
       >
-        <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Members
-          </h1>
-          <p className="mt-3 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Token-gated access to the Medialane community and governance.
-          </p>
-        </motion.div>
+        <PageHeader
+          title="Members"
+          description="Token-gated access to the Medialane community and governance."
+          containerVariants={containerVariants}
+          itemVariants={itemVariants}
+          className="mb-12"
+        />
 
         {/* Gate notice */}
         <motion.div variants={itemVariants} className="mb-10">

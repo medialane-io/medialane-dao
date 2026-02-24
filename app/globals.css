@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
@@ -151,7 +152,111 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .prose {
+    --tw-prose-body: var(--muted-foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-bullets: var(--primary);
+    --tw-prose-quotes: var(--foreground);
+    --tw-prose-quote-borders: var(--primary);
+    --tw-prose-hr: var(--border);
+    --tw-prose-code: var(--foreground);
+
+    max-width: none;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--tw-prose-body);
+  }
+
+  .dark .prose {
+    --tw-prose-body: oklch(0.85 0.02 264);
+    --tw-prose-headings: oklch(0.98 0.01 264);
+    --tw-prose-links: oklch(0.7 0.2 264);
+    --tw-prose-bold: oklch(0.98 0.01 264);
+    --tw-prose-bullets: oklch(0.7 0.2 264);
+    --tw-prose-quotes: oklch(0.98 0.01 264);
+    --tw-prose-hr: oklch(0.3 0.1 272);
+    --tw-prose-code: oklch(0.98 0.01 264);
+
+    color: var(--tw-prose-body);
+  }
+
+  /* Force Headings Styling */
+  .prose h1 {
+    font-size: 2.25rem !important;
+    font-weight: 800 !important;
+    margin-top: 0 !important;
+    margin-bottom: 2rem !important;
+    color: var(--tw-prose-headings) !important;
+    line-height: 1.2 !important;
+  }
+
+  .prose h2 {
+    font-size: 1.875rem !important;
+    font-weight: 700 !important;
+    margin-top: 3rem !important;
+    margin-bottom: 1.25rem !important;
+    color: var(--tw-prose-headings) !important;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    line-height: 1.3 !important;
+  }
+
+  .prose h3 {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    margin-top: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    color: var(--tw-prose-headings) !important;
+    line-height: 1.4 !important;
+  }
+
+  .prose p {
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
+  }
+
+  .prose ul,
+  .prose ol {
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
+    padding-left: 1.625em !important;
+    list-style-type: disc;
+  }
+
+  .prose li {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+  }
+
+  .prose strong {
+    color: var(--tw-prose-bold);
+    font-weight: 600;
+  }
+
+  .prose blockquote {
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.125rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: var(--tw-prose-headings);
+  }
+
+  .prose hr {
+    margin: 3rem 0;
+    border: 0;
+    border-top: 1px solid var(--border);
   }
 }

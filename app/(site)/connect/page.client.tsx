@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
+import { PageHeader } from '@/components/page-header'
 import { createContainerVariants, createItemVariants } from '@/lib/motion'
 
 const containerVariants = createContainerVariants()
@@ -34,15 +35,13 @@ export default function ConnectPageClient() {
         animate="visible"
         className="mx-auto w-full max-w-4xl"
       >
-        <motion.div variants={itemVariants} className="mb-12">
-          <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Connect
-          </h1>
-          <p className="mt-3 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            Join the network. Connect your wallet, reach out, or find us on the
-            platforms below.
-          </p>
-        </motion.div>
+        <PageHeader
+          title="Connect"
+          description="Join the network. Connect your wallet, reach out, or find us on the platforms below."
+          containerVariants={containerVariants}
+          itemVariants={itemVariants}
+          className="mb-12"
+        />
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Wallet Connect */}
