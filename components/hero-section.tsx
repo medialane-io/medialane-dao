@@ -12,17 +12,17 @@ const pillars = [
   {
     icon: Layers,
     title: 'Creator Launchpad',
-    description: 'A platform for creators to launch and monetize their content.',
+    description: 'Engine for capital structuring and revenue generation.',
   },
   {
     icon: Shield,
     title: 'NFT Marketplace',
-    description: 'A marketplace for creators to sell their digital assets.',
+    description: 'High-Integrity Exchange for trading tokenized creator assets.',
   },
   {
     icon: Globe,
     title: 'Programmable IP',
-    description: 'Monetize and licensing intellectual property on-chain.',
+    description: 'Decentralized ownership and programmable smart contract licensing.',
   },
 ]
 
@@ -59,7 +59,7 @@ export function HeroSection() {
           variants={itemVariants}
           className="max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl"
         >
-          Monetization hub for the Integrity Web
+          Creators Capital Markets on the Integrity Web
         </motion.p>
 
         {/* CTA 

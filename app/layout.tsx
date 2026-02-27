@@ -16,9 +16,9 @@ const _geistMono = Geist_Mono({
 import { colors } from '@/lib/site-config'
 
 export const metadata: Metadata = {
-  title: 'Medialane DAO | Integrity Web on Starknet',
+  title: 'Medialane | Creators Capital Markets on the Integrity Web',
   description:
-    'Medialane DAO is a decentralized autonomous organization building the integrity web for media on Starknet.',
+    'Medialane is the monetization hub of the new creative economy—bridging creators, businesses, and AI agents through a unified infrastructure.',
   generator: 'v0.app',
   icons: {
     icon: [
