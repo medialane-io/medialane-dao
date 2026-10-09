@@ -7,9 +7,12 @@
 
 ## What is Medialane?
 
-Medialane is a monetization layer for creators, collectors, organizations, and autonomous AI — deployed onchain, governed by the Medialane DAO. Creators mint and monetize digital assets as programmable NFTs. Every mint timestamps the work under the Berne Convention — instant copyright proof in 181 countries.
+Medialane builds better rails for creators, collectors, businesses and builders: an open foundation for **creator capital markets** onchain. Creators publish their work as programmable IP, with authorship, date, license and AI policy recorded permanently with every asset, and release it as editions, drops, coins, memberships and sponsorships. Collectors and communities back the work they believe in, directly.
 
-- **Protocols**: Zero knowledge proof with immutable Cairo smart contracts on Starknet mainnet
+Medialane is governed by the Medialane DAO, and every decision is public.
+
+- **App**: [medialane.io](https://medialane.io), live on Starknet mainnet since March 2026
+- **Protocols**: open, immutable Cairo smart contracts on Starknet, secured by zero-knowledge proofs
 - **Governance**: [medialane.eth](https://snapshot.org/#/s:medialane.eth)
 
 ---
@@ -47,7 +50,6 @@ token addresses are in the table above.
 - **STWO prover** — next-gen Cairo prover for faster finality and lower cost.
 - **Recursive proofs** — unlimited scale while maintaining cryptographic integrity.
 - **Native account abstraction** — session keys (SNIP-9) enable gasless multi-step flows.
-- **Sponsored transactions** — Medialane covers gas for most creator actions.
 - **Fraction-of-cent fees** — Starknet L2 costs orders of magnitude less than Ethereum mainnet.
 
 ---

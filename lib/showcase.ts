@@ -1,6 +1,6 @@
 /**
  * Showcase data layer — pulls live Medialane collections from the backend so
- * the DAO site can display real creative imagery (spec v2 §4.1).
+ * the DAO site can display real creative imagery.
  *
  * Best-effort, same discipline as lib/governance.ts: server-side, never throws,
  * returns [] on any failure so the UI degrades to no-carousel, never broken.
