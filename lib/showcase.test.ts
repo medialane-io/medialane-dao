@@ -2,9 +2,8 @@ import { test, expect } from 'bun:test'
 import { resolveImage, pickShowcase } from '@/lib/showcase'
 import type { RawCollection } from '@/lib/showcase'
 
-test('resolveImage converts ipfs:// to a gateway URL', () => {
-  expect(resolveImage('ipfs://QmAbc/cover.png')).toContain('QmAbc/cover.png')
-  expect(resolveImage('ipfs://QmAbc/cover.png')!.startsWith('http')).toBe(true)
+test('resolveImage converts ipfs:// to a Pinata gateway URL', () => {
+  expect(resolveImage('ipfs://QmAbc/cover.png')).toBe('https://gateway.pinata.cloud/ipfs/QmAbc/cover.png')
 })
 
 test('resolveImage passes through http(s) URLs unchanged', () => {
