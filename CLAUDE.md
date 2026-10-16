@@ -65,7 +65,7 @@ Data pages use `page.tsx` (server: fetches, exports `metadata`) → `page.client
 
 - `lib/governance.ts` — Snapshot proposals + MDLN stats (Etherscan). `ETHERSCAN_API_KEY` (server-only).
 - `lib/showcase.ts` — live collections from the Medialane backend for the homepage mosaic. **Server-only** `MEDIALANE_API_KEY` + `MEDIALANE_BACKEND_URL` — never `NEXT_PUBLIC_` (the fetch runs only in server components; the key must not reach the client bundle).
-- `lib/creators-fund.ts` — Creator's Fund balance via a Starknet RPC (`STARKNET_RPC_URL`, fallback keyless lava.build) + CoinGecko price.
+- `lib/creators-fund.ts` — Creator's Fund balance through the Medialane backend's `/v1/rpc` (same server-only `MEDIALANE_API_KEY` + `MEDIALANE_BACKEND_URL`) + CoinGecko price.
 
 All three follow the same discipline: server-side `fetch` with `next.revalidate`, return safe defaults on failure, never throw — the UI shows `—` or omits the element.
 
@@ -101,8 +101,7 @@ There is no `content/protocol/` — protocol docs moved to docs.medialane.io. `/
 | Variable | Purpose |
 |---|---|
 | `ETHERSCAN_API_KEY` | MDLN holder count / treasury balance (server-only) |
-| `STARKNET_RPC_URL` | Creator's Fund balance reads (optional; keyless public fallback) |
-| `MEDIALANE_API_KEY` | Backend read key for the homepage collection mosaic — **server-only, never `NEXT_PUBLIC_`** |
+| `MEDIALANE_API_KEY` | Backend key for the homepage collection mosaic and the Creator's Fund balance — **server-only, never `NEXT_PUBLIC_`** |
 | `MEDIALANE_BACKEND_URL` | Medialane API base (optional; defaults to `https://api.medialane.io`) |
 
 ## Content Principles

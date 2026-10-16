@@ -1,8 +1,9 @@
 /**
  * Creator's Fund data layer.
  *
- * Reads the public fund multisig's token balances from a Starknet RPC and
- * token prices from CoinGecko, then derives the airdrop-round status.
+ * Reads the public fund multisig's token balances through the Medialane
+ * backend's RPC and token prices from CoinGecko, then derives the
+ * airdrop-round status.
  *
  * Discipline (mirrors lib/governance.ts): best-effort, never throws. Anything
  * that cannot be fetched becomes `null` so the UI can render `—`.
@@ -96,26 +97,20 @@ export function deriveFundStatus(
 const BALANCE_OF_SELECTOR =
   '0x2e4263afad30923c891518314c3c95dbe830a16874e8abc5777a9a20b54c76e'
 
-/**
- * Starknet RPC endpoint. Set `STARKNET_RPC_URL` in the deployment environment
- * to a production provider. The fallback is Lava's public, keyless Starknet
- * RPC — adequate for a single 5-minute-cached call; if it fails the page
- * degrades to `—` and the Voyager link still works. The fallback must stay
- * keyless: this string is bundled, so never put an API-keyed URL here.
- */
-const RPC_URL =
-  process.env.STARKNET_RPC_URL ??
-  'https://rpc.starknet.lava.build'
-
 const COINGECKO_PRICE =
   'https://api.coingecko.com/api/v3/simple/price?ids=starknet,ethereum,bitcoin&vs_currencies=usd'
 
 /** Fetch one token's balance held by the fund wallet. Returns `null` on failure. */
 async function fetchBalance(tokenAddress: string): Promise<bigint | null> {
+  // Server-only env, the same as lib/showcase.ts — this module runs exclusively
+  // in server components. Do NOT add a NEXT_PUBLIC_ prefix here.
+  const apiKey = process.env.MEDIALANE_API_KEY ?? ''
+  const backendUrl = process.env.MEDIALANE_BACKEND_URL ?? 'https://api.medialane.io'
+  if (!apiKey) return null
   try {
-    const res = await fetch(RPC_URL, {
+    const res = await fetch(`${backendUrl}/v1/rpc`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
       body: JSON.stringify({
         jsonrpc: '2.0',
         id: 1,
