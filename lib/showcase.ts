@@ -20,7 +20,7 @@ export interface ShowcaseCollection {
   image: string
 }
 
-const IPFS_GATEWAY = 'https://ipfs.io/ipfs/'
+const IPFS_GATEWAY = 'https://gateway.pinata.cloud/ipfs/'
 
 /** Resolve an `ipfs://` URI to an HTTP gateway URL; pass http(s) through. */
 export function resolveImage(raw: string | null): string | null {
