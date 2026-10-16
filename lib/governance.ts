@@ -22,7 +22,6 @@ export interface MdlnStats {
 const SNAPSHOT_GRAPHQL = 'https://hub.snapshot.org/graphql'
 const ETHERSCAN_API = 'https://api.etherscan.io/api'
 
-/** Fetch latest proposals from medialane.eth Snapshot space */
 export async function getSnapshotProposals(limit = 5): Promise<SnapshotProposal[]> {
   try {
     const query = `
@@ -49,7 +48,7 @@ export async function getSnapshotProposals(limit = 5): Promise<SnapshotProposal[
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
-      next: { revalidate: 3600 }, // cache 1 hour
+      next: { revalidate: 3600 },
     })
 
     if (!res.ok) return []
@@ -63,7 +62,6 @@ export async function getSnapshotProposals(limit = 5): Promise<SnapshotProposal[
   }
 }
 
-/** Fetch MDLN holder count from Etherscan (best-effort) */
 export async function getMdlnStats(): Promise<MdlnStats> {
   const base: MdlnStats = {
     totalSupply: mdln.totalSupply,
@@ -76,7 +74,6 @@ export async function getMdlnStats(): Promise<MdlnStats> {
     const apiKey = process.env.ETHERSCAN_API_KEY ?? ''
     if (!apiKey) return base
 
-    // Token holder count
     const holderRes = await fetch(
       `${ETHERSCAN_API}?module=token&action=tokeninfo&contractaddress=${mdln.token}&apikey=${apiKey}`,
       { next: { revalidate: 3600 } }
@@ -86,7 +83,6 @@ export async function getMdlnStats(): Promise<MdlnStats> {
       ? parseInt(holderData.result[0].holdersCount)
       : null
 
-    // Treasury MDLN balance
     const balRes = await fetch(
       `${ETHERSCAN_API}?module=account&action=tokenbalance&contractaddress=${mdln.token}&address=${mdln.treasury}&tag=latest&apikey=${apiKey}`,
       { next: { revalidate: 3600 } }

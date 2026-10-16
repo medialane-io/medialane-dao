@@ -17,7 +17,6 @@ export interface PostMetadata {
 export function getAllPosts(subdirectory: string = ''): PostMetadata[] {
     const targetDirectory = path.join(contentDirectory, subdirectory);
 
-    // Ensure the directory exists
     if (!fs.existsSync(targetDirectory)) {
         return [];
     }
@@ -37,7 +36,6 @@ export function getAllPosts(subdirectory: string = ''): PostMetadata[] {
             };
         });
 
-    // Sort posts by date (handling cases where date might be missing)
     return allPostsData.sort((a, b) => {
         if (!a.date || !b.date) return 0;
         return a.date < b.date ? 1 : -1;

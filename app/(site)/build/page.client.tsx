@@ -25,7 +25,6 @@ export default function BuildPageClient() {
   return (
     <div className="space-y-20 sm:space-y-24">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Build</p>
@@ -57,7 +56,6 @@ export default function BuildPageClient() {
         </FadeIn>
       </section>
 
-      {/* Destinations */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-blue">Where to go</p>

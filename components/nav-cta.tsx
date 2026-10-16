@@ -1,9 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
 
-/**
- * Pinned CTA for the NavCommandMenu `accountSlot`. The DAO site is
- * informational — this links visitors to the Medialane product app.
- */
 export function NavCta() {
   return (
     <a

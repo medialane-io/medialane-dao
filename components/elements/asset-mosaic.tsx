@@ -4,15 +4,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import type { ShowcaseCollection } from '@/lib/showcase'
 
-/**
- * Full-bleed horizontal filmstrip of real Medialane collection art. Square
- * tiles, flush together (no gap, no rounding, no edge fade) — the marquee
- * loops seamlessly because the strip is rendered exactly twice and animates
- * by exactly one half. Renders nothing when there is no data.
- */
 export function AssetMosaic({ items }: { items: ShowcaseCollection[] }) {
   if (items.length === 0) return null
-  // Render the strip twice so a 0% → -50% translate loops with no seam.
   const strip = [...items, ...items]
   return (
     <section aria-label="Collections on Medialane" className="overflow-hidden">

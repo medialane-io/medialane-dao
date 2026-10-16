@@ -8,7 +8,6 @@ import { SectionHeader } from '@/components/section-header'
 import { creatorsFund } from '@/lib/site-config'
 import type { CreatorsFundStatus } from '@/lib/creators-fund'
 
-/** Format a USD number, or `—` when the value is unavailable. */
 function usd(value: number | null): string {
   if (value === null) return '—'
   return value.toLocaleString('en-US', {
@@ -18,13 +17,11 @@ function usd(value: number | null): string {
   })
 }
 
-/** Format a token balance with sensible precision (more decimals for small amounts). */
 function fmtAmount(n: number): string {
   if (n === 0) return '0'
   return n.toLocaleString('en-US', { maximumFractionDigits: n < 1 ? 8 : 4 })
 }
 
-/** Format a unit price — extra decimals below $1 so sub-cent prices are visible. */
 function fmtPrice(n: number | null): string {
   if (n === null) return '—'
   return n.toLocaleString('en-US', {
@@ -34,7 +31,6 @@ function fmtPrice(n: number | null): string {
   })
 }
 
-/** Tokens accepted by the fund — shown as a hint on the tip panel. */
 const ACCEPTED = creatorsFund.tokens.map((t) => t.symbol).join(' · ')
 
 const STEPS = [
@@ -52,7 +48,6 @@ const STEPS = [
   },
 ]
 
-/** Copy-to-clipboard button with a transient confirmation. */
 function CopyButton({ value }: { value: string }) {
   const [copied, setCopied] = useState(false)
   return (
@@ -62,9 +57,7 @@ function CopyButton({ value }: { value: string }) {
           await navigator.clipboard.writeText(value)
           setCopied(true)
           setTimeout(() => setCopied(false), 1500)
-        } catch {
-          /* clipboard unavailable — no-op */
-        }
+        } catch {}
       }}
       className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-border transition-colors"
       aria-label="Copy address"
@@ -88,7 +81,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
         description="Medialane charges a small 1% fee on earnings; minting is always free. All of it goes into one public wallet and is airdropped back to the creators and collectors who use the platform."
       />
 
-      {/* Live status */}
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <StatCard label="In the fund now" value={usd(totalUsd)} aurora="aurora-blue" />
@@ -104,7 +96,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
           />
         </div>
 
-        {/* Progress bar toward the next round */}
         {!readyToDistribute && (
           <div className="mt-4 bento-cell p-5">
             <div className="flex items-center justify-between mb-2">
@@ -124,7 +115,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
           </div>
         )}
 
-        {/* Year-one note: revenue routes straight to the fund instead of the treasury */}
         <div className="mt-4 rounded-xl border border-brand-blue/20 bg-brand-blue/5 p-5">
           <p className="text-sm text-foreground leading-relaxed">
             <span className="font-semibold">A note on year one.</span> Platform revenue normally
@@ -136,7 +126,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
         </div>
       </section>
 
-      {/* See it yourself — the wallet + live holdings */}
       <section>
         <SectionHeader label="See it yourself" size="lg" />
         <p className="text-sm text-foreground max-w-2xl mb-5">
@@ -145,7 +134,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
         </p>
 
         <div className="bento-cell overflow-hidden max-w-3xl">
-          {/* Wallet address header */}
           <div className="flex items-center justify-between gap-4 p-5 border-b border-border/60">
             <div className="min-w-0">
               <p className="text-xs text-muted-foreground/60 mb-1">Creator&apos;s Fund wallet</p>
@@ -164,7 +152,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
             </div>
           </div>
 
-          {/* Live token holdings */}
           {tokens.length > 0 ? (
             <table className="w-full text-sm">
               <thead>
@@ -211,7 +198,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
         </div>
       </section>
 
-      {/* Tip / donate to the fund */}
       <section>
         <SectionHeader label="Add to the fund" size="lg" />
         <div className="bento-cell p-6 sm:p-8 max-w-3xl">
@@ -244,7 +230,6 @@ export function CreatorsFundClient({ status }: { status: CreatorsFundStatus }) {
         </div>
       </section>
 
-      {/* How it works */}
       <section>
         <SectionHeader label="How it works" size="lg" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

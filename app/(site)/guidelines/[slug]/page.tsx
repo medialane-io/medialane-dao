@@ -16,7 +16,6 @@ export async function generateStaticParams() {
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params
 
-  // Try dao, then root
   const post =
     (await getPostBySlug(slug, 'dao')) ??
     (await getPostBySlug(slug, ''))
@@ -28,7 +27,6 @@ export default async function PostPage({ params }: PostPageProps) {
   return (
     <div className="px-4 sm:px-6 lg:px-10 xl:px-14 pt-16 pb-10 sm:pt-20 sm:pb-12 lg:pt-24 lg:pb-16 max-w-3xl">
 
-      {/* Back */}
       <Link
         href="/guidelines"
         className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/60 hover:text-foreground transition-colors mb-6"
@@ -37,7 +35,6 @@ export default async function PostPage({ params }: PostPageProps) {
         All Docs
       </Link>
 
-      {/* Header */}
       <div className="mb-6 pb-5 border-b border-border">
         <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground/40 mb-2">
           Medialane · Documentation
@@ -62,7 +59,6 @@ export default async function PostPage({ params }: PostPageProps) {
         )}
       </div>
 
-      {/* Content */}
       <article
         className="prose prose-sm dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-primary"
         dangerouslySetInnerHTML={{ __html: contentHtml }}

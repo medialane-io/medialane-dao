@@ -46,7 +46,6 @@ export default function AirdropPageClient() {
   return (
     <div className="space-y-20 sm:space-y-24">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <div className="mb-5 flex items-center gap-2">
@@ -63,7 +62,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* How it works */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-orange">How it works</p>
@@ -76,7 +74,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* Distributions */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <h2 className="mb-6 text-3xl font-black tracking-tight sm:text-4xl">Distributions</h2>
@@ -91,7 +88,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* Your share */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-purple">Your share</p>
@@ -105,7 +101,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* Fair by design */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h2 className="mb-6 text-3xl font-black tracking-tight sm:text-4xl">Fair by design</h2>
@@ -119,7 +114,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* How to take part */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h2 className="text-3xl font-black tracking-tight sm:text-4xl">How to take part</h2>
@@ -147,7 +141,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* Creator's Fund */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <div className="rounded-2xl bg-gradient-to-br from-brand-blue/10 via-brand-purple/5 to-brand-orange/10 p-8 sm:p-12">
@@ -170,7 +163,6 @@ export default function AirdropPageClient() {
         </FadeIn>
       </section>
 
-      {/* Disclaimer */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground/50">
           Airdrop rules are governed by MDLN holders and may change between cycles. The Creator&apos;s

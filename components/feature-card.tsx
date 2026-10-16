@@ -61,7 +61,6 @@ function CardContent({
         gradient && `bg-gradient-to-br ${gradient}`
       )}
     >
-      {/* Top row: icon + status + arrow */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-3">
           {Icon && (
@@ -81,7 +80,6 @@ function CardContent({
         </div>
       </div>
 
-      {/* Title */}
       <p className={cn(
         'text-sm font-bold text-foreground leading-snug',
         hasLink && 'group-hover:text-primary transition-colors'
@@ -89,12 +87,10 @@ function CardContent({
         {title}
       </p>
 
-      {/* Description */}
       <p className="text-sm text-foreground leading-relaxed flex-1">
         {description}
       </p>
 
-      {/* Tags */}
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap gap-1.5 pt-1">
           {tags.map((tag) => (

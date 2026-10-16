@@ -18,7 +18,6 @@ export default function GuidelinesPage() {
   return (
     <div className="space-y-20 sm:space-y-24">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Guidelines</p>
@@ -33,7 +32,6 @@ export default function GuidelinesPage() {
         </FadeIn>
       </section>
 
-      {/* Document sections */}
       {sections.map((section) => {
         if (section.docs.length === 0) return null
         return (
@@ -64,7 +62,6 @@ export default function GuidelinesPage() {
         )
       })}
 
-      {/* Product documentation CTA */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <div className="rounded-2xl bg-gradient-to-br from-brand-purple/10 via-brand-blue/5 to-brand-orange/10 p-8 sm:p-12">

@@ -8,7 +8,6 @@ import { NAV_COMMANDS } from '@/lib/nav-commands'
 import { NavThemeToggle } from '@/components/nav-theme-toggle'
 import { NavCta } from '@/components/nav-cta'
 
-/** Top-left logo + menu button — opens the command menu. */
 function NavTrigger() {
   const { open } = useNavCommandMenu()
   return (
@@ -29,7 +28,6 @@ function NavTrigger() {
   )
 }
 
-/** Site shell — command-menu navigation, full-width content, footer. */
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>

@@ -18,8 +18,6 @@ import { FadeIn } from '@medialane/ui'
 import type { ShowcaseCollection } from '@/lib/showcase'
 import { AssetMosaic } from '@/components/elements/asset-mosaic'
 
-/* ── What you can do — the four pillars ────────────────────────────────── */
-
 const pillars = [
   {
     eyebrow: 'Own',
@@ -46,8 +44,6 @@ const pillars = [
     color: 'text-brand-rose',
   },
 ]
-
-/* ── What you can count on — the foundational guarantees ───────────────── */
 
 const guarantees = [
   {
@@ -76,8 +72,6 @@ const guarantees = [
     dot: 'bg-brand-blue',
   },
 ]
-
-/* ── Ways to create and earn — current services ────────────────────────── */
 
 const services = [
   {
@@ -154,8 +148,6 @@ const services = [
   },
 ]
 
-/* ── Go further — destinations ─────────────────────────────────────────── */
-
 const explore = [
   { href: '/explore', title: 'Explore Medialane', desc: 'What you can do, and how it all works.' },
   { href: '/creators-fund', title: "Creator's Fund", desc: 'Watch every fee return to the community, live.' },
@@ -165,13 +157,10 @@ const explore = [
   { href: '/connect', title: 'Connect', desc: 'Get involved and meet the community.' },
 ]
 
-/* ── Homepage ──────────────────────────────────────────────────────────── */
-
 export function HeroSection({ collections }: { collections: ShowcaseCollection[] }) {
   return (
     <div className="space-y-20 sm:space-y-28">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h1 className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
@@ -204,7 +193,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </FadeIn>
       </section>
 
-      {/* Real collections */}
       {collections.length > 0 && (
         <section>
           <p className="mb-5 px-4 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60 sm:px-6 lg:px-10 xl:px-14">
@@ -214,7 +202,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </section>
       )}
 
-      {/* What you can do — pillars */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <h2 className="text-3xl font-black tracking-tight sm:text-4xl">
@@ -236,7 +223,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </FadeIn>
       </section>
 
-      {/* What you can count on */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <h2 className="text-3xl font-black tracking-tight sm:text-4xl">What you can count on</h2>
@@ -261,7 +247,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </FadeIn>
       </section>
 
-      {/* Ways to create and earn */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
@@ -301,7 +286,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </FadeIn>
       </section>
 
-      {/* Creator's Airdrop callout */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <div className="rounded-2xl bg-gradient-to-br from-brand-orange/12 via-brand-rose/6 to-brand-purple/12 p-8 sm:p-12">
@@ -336,7 +320,6 @@ export function HeroSection({ collections }: { collections: ShowcaseCollection[]
         </FadeIn>
       </section>
 
-      {/* Go further */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <h2 className="mb-8 text-3xl font-black tracking-tight sm:text-4xl">Go further</h2>

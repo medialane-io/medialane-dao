@@ -6,13 +6,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Medialane DAO Brand Colors
-   Blue:      #0000FF  -> oklch(0.452 0.313 264.052)
-   Deep Blue: #0C0C4F  -> oklch(0.175 0.117 272.04)
-   Orange:    #EC796B  -> oklch(0.688 0.149 25.0)
-   Mauve:     #E175B1  -> oklch(0.686 0.157 346.0)
-*/
-
 :root {
   --background: oklch(0.98 0.002 248);
   --foreground: oklch(0.175 0.117 272.04);
@@ -48,7 +41,6 @@
   --sidebar-border: oklch(0.89 0.015 255);
   --sidebar-ring: oklch(0.49 0.22 270);
 
-  /* Medialane custom tokens */
   --ml-blue: oklch(0.49 0.22 270);
   --ml-deep: oklch(0.175 0.117 272.04);
   --ml-orange: oklch(0.688 0.149 25.0);
@@ -57,7 +49,6 @@
   --ml-glass: oklch(1.0 0.001 248 / 0.8);
   --ml-glass-border: oklch(0.89 0.015 255 / 0.6);
 
-  /* Brand palette (matches @medialane/ui preset) */
   --brand-blue:   oklch(0.546 0.245 262);
   --brand-navy:   oklch(0.216 0.126 262);
   --brand-rose:   oklch(0.591 0.241 15);
@@ -99,7 +90,6 @@
   --sidebar-border: oklch(0.18 0.03 258);
   --sidebar-ring: oklch(0.62 0.22 272);
 
-  /* Medialane custom tokens (dark) */
   --ml-blue: oklch(0.62 0.22 272);
   --ml-deep: oklch(0.08 0.02 248);
   --ml-orange: oklch(0.688 0.149 25.0);
@@ -108,7 +98,6 @@
   --ml-glass: oklch(0.13 0.025 252 / 0.65);
   --ml-glass-border: oklch(0.25 0.04 268 / 0.35);
 
-  /* Brand palette */
   --brand-blue:   oklch(0.546 0.245 262);
   --brand-navy:   oklch(0.216 0.126 262);
   --brand-rose:   oklch(0.591 0.241 15);
@@ -118,7 +107,6 @@
 
 @theme inline {
   --font-sans: var(--font-sans, 'Inter'), ui-sans-serif, system-ui, sans-serif;
-  /* Single typeface — `font-mono` resolves to Inter too (tabular-nums handles figures). */
   --font-mono: var(--font-sans, 'Inter'), ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -185,7 +173,6 @@
   }
 }
 
-/* ── Card depth in light mode ── */
 .bento-cell {
   box-shadow: 0 1px 3px oklch(0 0 0 / 0.07), 0 1px 2px oklch(0 0 0 / 0.05);
 }
@@ -193,7 +180,6 @@
   box-shadow: none;
 }
 
-/* ── Aurora background blobs ── */
 .aurora-blob {
   position: absolute;
   border-radius: 9999px;
@@ -207,7 +193,6 @@
 .dark .aurora-orange { opacity: 0.09; }
 .dark .aurora-mauve  { opacity: 0.07; }
 
-/* ── Gradient text ── */
 .gradient-text {
   background: linear-gradient(135deg, #E175B1 0%, #0000FF 50%, #EC796B 100%);
   -webkit-background-clip: text;
@@ -246,7 +231,6 @@
     color: var(--tw-prose-body);
   }
 
-  /* Force Headings Styling */
   .prose h1 {
     font-size: 2.25rem !important;
     font-weight: 800 !important;
@@ -318,10 +302,6 @@
   }
 }
 
-/* ── Nav command menu — readable scrim on every theme ──────────────────── */
-/* @medialane/ui's .nav-canvas-overlay only blurs the page behind the menu;
-   with no tint the translucent panel reads as see-through on a light page.
-   A neutral dim makes the panel pop in both light and dark. */
 .nav-canvas-overlay {
   background: rgb(0 0 0 / 0.55);
 }
