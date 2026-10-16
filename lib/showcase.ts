@@ -6,6 +6,8 @@
  * returns [] on any failure so the UI degrades to no-carousel, never broken.
  */
 
+import { ipfsToHttp } from '@medialane/ui/utils/ipfs'
+
 /** Raw collection shape consumed from the backend (subset of ApiCollection). */
 export interface RawCollection {
   name: string | null
@@ -20,16 +22,6 @@ export interface ShowcaseCollection {
   image: string
 }
 
-const IPFS_GATEWAY = 'https://ipfs.io/ipfs/'
-
-/** Resolve an `ipfs://` URI to an HTTP gateway URL; pass http(s) through. */
-export function resolveImage(raw: string | null): string | null {
-  if (!raw) return null
-  if (raw.startsWith('ipfs://')) return IPFS_GATEWAY + raw.slice('ipfs://'.length)
-  if (raw.startsWith('http')) return raw
-  return null
-}
-
 /** Keep named + imaged collections, dedupe by address, cap at 24. */
 export function pickShowcase(raw: RawCollection[]): ShowcaseCollection[] {
   const seen = new Set<string>()
@@ -37,7 +29,7 @@ export function pickShowcase(raw: RawCollection[]): ShowcaseCollection[] {
   for (const c of raw) {
     if (!c.name) continue
     if (seen.has(c.contractAddress)) continue
-    const image = resolveImage(c.image)
+    const image = ipfsToHttp(c.image)
     if (!image) continue
     seen.add(c.contractAddress)
     out.push({ name: c.name, contractAddress: c.contractAddress, image })

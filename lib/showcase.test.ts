@@ -1,20 +1,6 @@
 import { test, expect } from 'bun:test'
-import { resolveImage, pickShowcase } from '@/lib/showcase'
+import { pickShowcase } from '@/lib/showcase'
 import type { RawCollection } from '@/lib/showcase'
-
-test('resolveImage converts ipfs:// to a gateway URL', () => {
-  expect(resolveImage('ipfs://QmAbc/cover.png')).toContain('QmAbc/cover.png')
-  expect(resolveImage('ipfs://QmAbc/cover.png')!.startsWith('http')).toBe(true)
-})
-
-test('resolveImage passes through http(s) URLs unchanged', () => {
-  expect(resolveImage('https://x.io/a.png')).toBe('https://x.io/a.png')
-})
-
-test('resolveImage returns null for null/empty', () => {
-  expect(resolveImage(null)).toBeNull()
-  expect(resolveImage('')).toBeNull()
-})
 
 test('pickShowcase keeps only collections with a name and image, dedupes, caps at 24', () => {
   const raw: RawCollection[] = [
