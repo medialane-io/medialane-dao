@@ -1,8 +1,7 @@
 /**
  * Creator's Fund data layer.
  *
- * Reads the public fund multisig's token balances from a Starknet RPC and
- * token prices from CoinGecko, then derives the airdrop-round status.
+ * Reads token prices from CoinGecko and derives the airdrop-round status.
  *
  * Discipline (mirrors lib/governance.ts): best-effort, never throws. Anything
  * that cannot be fetched becomes `null` so the UI can render `—`.
@@ -50,18 +49,6 @@ export interface CreatorsFundStatus {
   distributions: Distribution[]
 }
 
-/** Combine a Starknet u256 call result `[low, high]` into a single bigint. */
-export function parseU256(result: string[]): bigint {
-  const low = BigInt(result[0] ?? '0x0')
-  const high = BigInt(result[1] ?? '0x0')
-  return low + (high << 128n)
-}
-
-/** Scale a raw on-chain token amount to human units. */
-export function toHuman(raw: bigint, decimals: number): number {
-  return Number(raw) / 10 ** decimals
-}
-
 /**
  * Derive the round-status fields from fetched token data and distributions.
  *
@@ -92,53 +79,8 @@ export function deriveFundStatus(
   }
 }
 
-/** `balanceOf(felt252)` entry-point selector. */
-const BALANCE_OF_SELECTOR =
-  '0x2e4263afad30923c891518314c3c95dbe830a16874e8abc5777a9a20b54c76e'
-
-/**
- * Starknet RPC endpoint. Set `STARKNET_RPC_URL` in the deployment environment
- * to a production provider. The fallback is Lava's public, keyless Starknet
- * RPC — adequate for a single 5-minute-cached call; if it fails the page
- * degrades to `—` and the Voyager link still works. The fallback must stay
- * keyless: this string is bundled, so never put an API-keyed URL here.
- */
-const RPC_URL =
-  process.env.STARKNET_RPC_URL ??
-  'https://rpc.starknet.lava.build'
-
 const COINGECKO_PRICE =
   'https://api.coingecko.com/api/v3/simple/price?ids=starknet,ethereum,bitcoin&vs_currencies=usd'
-
-/** Fetch one token's balance held by the fund wallet. Returns `null` on failure. */
-async function fetchBalance(tokenAddress: string): Promise<bigint | null> {
-  try {
-    const res = await fetch(RPC_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        id: 1,
-        method: 'starknet_call',
-        params: [
-          {
-            contract_address: tokenAddress,
-            entry_point_selector: BALANCE_OF_SELECTOR,
-            calldata: [creatorsFund.address],
-          },
-          'latest',
-        ],
-      }),
-      next: { revalidate: 300 },
-    })
-    if (!res.ok) return null
-    const json = await res.json()
-    if (!Array.isArray(json?.result)) return null
-    return parseU256(json.result)
-  } catch {
-    return null
-  }
-}
 
 /** Fetch STRK + ETH + BTC USD prices keyed by CoinGecko id. Returns `{}` on failure. */
 async function fetchPrices(): Promise<Record<string, number>> {
@@ -166,8 +108,6 @@ export async function getCreatorsFundStatus(): Promise<CreatorsFundStatus> {
 
   const rawTokens: FundToken[] = await Promise.all(
     creatorsFund.tokens.map(async (token) => {
-      const raw = await fetchBalance(token.address)
-      const balance = raw === null ? 0 : toHuman(raw, token.decimals)
       // Unit price: stablecoins ($1) vs market-priced tokens (CoinGecko).
       const priceUsd =
         token.coingeckoId === null
@@ -175,9 +115,8 @@ export async function getCreatorsFundStatus(): Promise<CreatorsFundStatus> {
           : typeof prices[token.coingeckoId] === 'number'
             ? prices[token.coingeckoId]
             : null
-      // Value is only known when both the balance and the price are known.
-      const usd = raw === null || priceUsd === null ? null : balance * priceUsd
-      return { symbol: token.symbol, name: token.name, balance, priceUsd, usd }
+      // The balance is not read, so its value is unknown.
+      return { symbol: token.symbol, name: token.name, balance: 0, priceUsd, usd: null }
     }),
   )
 

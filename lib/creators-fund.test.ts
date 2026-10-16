@@ -1,19 +1,6 @@
 import { test, expect } from 'bun:test'
-import { parseU256, toHuman, deriveFundStatus } from '@/lib/creators-fund'
+import { deriveFundStatus } from '@/lib/creators-fund'
 import type { FundToken, Distribution } from '@/lib/creators-fund'
-
-test('parseU256 combines [low, high] hex into a bigint', () => {
-  expect(parseU256(['0x63eb89da4ed0000', '0x0'])).toBe(450000000000000000n)
-  expect(parseU256(['0x0', '0x1'])).toBe(1n << 128n)
-  expect(parseU256(['0x2', '0x1'])).toBe((1n << 128n) + 2n)
-  expect(parseU256([])).toBe(0n)
-})
-
-test('toHuman scales raw amounts by token decimals', () => {
-  expect(toHuman(450000000000000000n, 18)).toBe(0.45)
-  expect(toHuman(1000000n, 6)).toBe(1)
-  expect(toHuman(0n, 18)).toBe(0)
-})
 
 test('deriveFundStatus: normal case sums USD and computes progress', () => {
   const tokens: FundToken[] = [{ symbol: 'STRK', balance: 0.45, usd: 0.054 }]
