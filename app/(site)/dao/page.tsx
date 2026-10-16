@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 }
 
 export default async function DAOPage() {
-  // Fetch docs + live governance data in parallel
   const [postsMetadata, proposals, stats] = await Promise.all([
     getAllPosts('dao'),
     getSnapshotProposals(5),

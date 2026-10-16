@@ -217,7 +217,6 @@ export default function ExplorePageClient() {
   return (
     <div className="space-y-20 sm:space-y-28">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
@@ -233,7 +232,6 @@ export default function ExplorePageClient() {
         </FadeIn>
       </section>
 
-      {/* Sections */}
       {sections.map((s) => (
         <section key={s.eyebrow} className="px-4 sm:px-6 lg:px-10 xl:px-14">
           <FadeIn>
@@ -253,7 +251,6 @@ export default function ExplorePageClient() {
         </section>
       ))}
 
-      {/* Simple by design */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn>
           <div className="rounded-2xl bg-gradient-to-br from-brand-blue/10 via-brand-purple/5 to-transparent p-8 sm:p-12">

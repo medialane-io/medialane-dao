@@ -9,7 +9,6 @@ export const siteConfig = {
   ens: 'medialane.eth',
 } as const
 
-/** MDLN Governance Token — Ethereum mainnet */
 export const mdln = {
   symbol: 'MDLN',
   name: 'Medialane',
@@ -25,30 +24,17 @@ export const mdln = {
   etherscanTreasury: 'https://etherscan.io/address/0xA7603783edD8ee6FF4B085f90Af53341282d244C',
 } as const
 
-/**
- * Starknet config for the DAO site. Only the MDLN bridge token is referenced here —
- * the live protocol contracts (marketplace, factories, credentials) are published, with
- * current addresses, at https://docs.medialane.io/dev/contracts. Do not hardcode them
- * here: they drift on redeploy and become a stale-address hazard.
- */
 export const starknet = {
   network: 'Starknet Mainnet',
-  /** Bridged MDLN on Starknet */
   mdlnL2: '0x6730d6a357690cebffad800219e9630e15b6f44d35526e0fc9ee52bdf7418e8',
   voyagerMdln: 'https://voyager.online/contract/0x6730d6a357690cebffad800219e9630e15b6f44d35526e0fc9ee52bdf7418e8',
 } as const
 
-/**
- * Creator's Fund — the public Starknet multisig that collects the 1% platform
- * fee and airdrops it back to the community. Verified live 2026-05-21.
- */
 export const creatorsFund = {
   address: '0x064c51746dbcb7498cc6e4b8abfcacd60805c0762b0411bb0515c611b5ae8223',
   voyager:
     'https://voyager.online/contract/0x064c51746dbcb7498cc6e4b8abfcacd60805c0762b0411bb0515c611b5ae8223',
-  /** Next airdrop fires each time the fund reaches this USD amount. */
   nextRoundUsd: 1000,
-  /** ERC-20 tokens the fund can hold. `coingeckoId: null` ⇒ treat as $1 (stablecoin). */
   tokens: [
     {
       symbol: 'STRK',
@@ -72,7 +58,6 @@ export const creatorsFund = {
       coingeckoId: 'ethereum' as string | null,
     },
     {
-      // Circle-native USDC — the asset x402 agent payments settle in.
       symbol: 'USDC',
       name: 'USD Coin',
       address: '0x033068f6539f8e6e6b131e6b2b814e6c34a5224bc66947c47dab9dfee93b35fb',
@@ -80,7 +65,6 @@ export const creatorsFund = {
       coingeckoId: null as string | null,
     },
     {
-      // Legacy bridged USDC.e — kept so existing fund holdings still count.
       symbol: 'USDC.e',
       name: 'USD Coin (bridged)',
       address: '0x053c91253bc9682c04929ca02ed00b3e423f6710d2ee7e0d5ebb06f3ecf368a8',
@@ -97,8 +81,6 @@ export const creatorsFund = {
   ],
 } as const
 
-// brand colors used throughout the app; pulling from a single source makes
-// it trivial to adjust the palette without hunting through JSX files.
 export const colors = {
   primary: '#0000FF',
   secondary: '#EC796B',

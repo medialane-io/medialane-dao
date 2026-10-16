@@ -1,12 +1,3 @@
-/**
- * Creator's Fund data layer.
- *
- * Reads token prices from CoinGecko and derives the airdrop-round status.
- *
- * Discipline (mirrors lib/governance.ts): best-effort, never throws. Anything
- * that cannot be fetched becomes `null` so the UI can render `—`.
- */
-
 import distributionsData from '@/content/data/fund-distributions.json'
 import { creatorsFund } from '@/lib/site-config'
 
@@ -20,43 +11,25 @@ export interface Distribution {
 
 export interface FundToken {
   symbol: string
-  /** Full token name, e.g. "Starknet Token". */
   name: string
   balance: number
-  /** Unit price in USD. `null` when the price is unknown. */
   priceUsd: number | null
-  /** USD value of the held balance. `null` when the price or balance is unknown. */
   usd: number | null
 }
 
 export interface CreatorsFundStatus {
   address: string
   voyager: string
-  /** Tokens with a non-zero balance. */
   tokens: FundToken[]
-  /** Total USD across all tokens. `null` if any balance/price could not be read. */
   totalUsd: number | null
-  /** USD threshold that triggers the next airdrop. */
   nextRoundUsd: number
-  /** Progress toward the next round, capped at `nextRoundUsd`. `null` if unknown. */
   progressUsd: number | null
-  /** True when the fund has reached the next-round threshold. */
   readyToDistribute: boolean
-  /** Number of airdrop rounds already paid out. */
   roundsPaid: number
-  /** Total USD returned to the community across all past rounds. */
   totalReturnedUsd: number
   distributions: Distribution[]
 }
 
-/**
- * Derive the round-status fields from fetched token data and distributions.
- *
- * `rawTokens` may include zero-balance tokens; they are dropped from the
- * displayed `tokens` list. A token with `usd === null` (failed balance fetch
- * or missing price) forces `totalUsd` to `null` — the page shows `—` rather
- * than an inaccurate number.
- */
 export function deriveFundStatus(
   rawTokens: FundToken[],
   distributions: Distribution[],
@@ -79,10 +52,46 @@ export function deriveFundStatus(
   }
 }
 
+const BALANCE_OF_SELECTOR =
+  '0x2e4263afad30923c891518314c3c95dbe830a16874e8abc5777a9a20b54c76e'
+
+const BACKEND_URL =
+  process.env.MEDIALANE_BACKEND_URL ?? 'https://api.medialane.io'
+const API_KEY = process.env.MEDIALANE_API_KEY ?? ''
+
+async function fetchBalance(tokenAddress: string): Promise<bigint | null> {
+  if (!API_KEY) return null
+  try {
+    const res = await fetch(`${BACKEND_URL}/v1/rpc`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'starknet_call',
+        params: [
+          {
+            contract_address: tokenAddress,
+            entry_point_selector: BALANCE_OF_SELECTOR,
+            calldata: [creatorsFund.address],
+          },
+          'latest',
+        ],
+      }),
+      next: { revalidate: 300 },
+    })
+    if (!res.ok) return null
+    const json = await res.json()
+    if (!Array.isArray(json?.result)) return null
+    return BigInt(json.result[0] ?? '0x0') + (BigInt(json.result[1] ?? '0x0') << 128n)
+  } catch {
+    return null
+  }
+}
+
 const COINGECKO_PRICE =
   'https://api.coingecko.com/api/v3/simple/price?ids=starknet,ethereum,bitcoin&vs_currencies=usd'
 
-/** Fetch STRK + ETH + BTC USD prices keyed by CoinGecko id. Returns `{}` on failure. */
 async function fetchPrices(): Promise<Record<string, number>> {
   try {
     const res = await fetch(COINGECKO_PRICE, { next: { revalidate: 300 } })
@@ -98,25 +107,22 @@ async function fetchPrices(): Promise<Record<string, number>> {
   }
 }
 
-/**
- * Fetch the full Creator's Fund status. Best-effort: always resolves, never
- * throws. Failed reads surface as `null` values.
- */
 export async function getCreatorsFundStatus(): Promise<CreatorsFundStatus> {
   const distributions = distributionsData as Distribution[]
   const prices = await fetchPrices()
 
   const rawTokens: FundToken[] = await Promise.all(
     creatorsFund.tokens.map(async (token) => {
-      // Unit price: stablecoins ($1) vs market-priced tokens (CoinGecko).
+      const raw = await fetchBalance(token.address)
+      const balance = raw === null ? 0 : Number(raw) / 10 ** token.decimals
       const priceUsd =
         token.coingeckoId === null
           ? 1
           : typeof prices[token.coingeckoId] === 'number'
             ? prices[token.coingeckoId]
             : null
-      // The balance is not read, so its value is unknown.
-      return { symbol: token.symbol, name: token.name, balance: 0, priceUsd, usd: null }
+      const usd = raw === null || priceUsd === null ? null : balance * priceUsd
+      return { symbol: token.symbol, name: token.name, balance, priceUsd, usd }
     }),
   )
 

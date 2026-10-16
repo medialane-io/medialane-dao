@@ -1,10 +1,6 @@
 import type { NavCommandGroup } from '@medialane/ui'
 import { Home, Compass, Landmark, Gift, ShieldCheck, Coins, Wrench, BookOpen, Mail, Zap } from 'lucide-react'
 
-/**
- * Navigation model for the command menu (⌘K). The first (unheaded) group is
- * the emphasized primary menu; the "Navigate" group is secondary.
- */
 export const NAV_COMMANDS: NavCommandGroup[] = [
   {
     items: [

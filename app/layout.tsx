@@ -4,7 +4,6 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
-// Inter is the single typeface across medialane.org — display and body.
 const _inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
@@ -18,12 +17,8 @@ export const metadata: Metadata = {
   description:
     'Medialane is the monetization hub of the new creative economy, bridging creators, businesses, and AI agents through a unified infrastructure.',
   icons: {
-    icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/icon.png',
+    apple: '/icon.png',
   },
 }
 

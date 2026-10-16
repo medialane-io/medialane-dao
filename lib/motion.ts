@@ -1,9 +1,5 @@
 import { Variants } from 'framer-motion'
 
-// Helpers to build motion variants with adjustable timing/spacing.
-// Pages and components can call these with their own parameters
-// while still keeping the bulk of the definitions in one place.
-
 export function createContainerVariants(
   staggerChildren = 0.1,
   delayChildren = 0.2

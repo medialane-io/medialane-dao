@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   title: 'Token | Medialane DAO',
 }
 
-// server wrapper (client loaded dynamically)
 export default function TokenPage() {
   return <TokenPageClient />
 }

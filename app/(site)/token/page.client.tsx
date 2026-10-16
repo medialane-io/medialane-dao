@@ -37,7 +37,6 @@ export default function TokenPageClient() {
   return (
     <div className="space-y-20 sm:space-y-24">
 
-      {/* Hero */}
       <section className="px-4 pt-16 sm:px-6 sm:pt-20 lg:px-10 lg:pt-24 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Token</p>
@@ -51,7 +50,6 @@ export default function TokenPageClient() {
         </FadeIn>
       </section>
 
-      {/* Distribution */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-purple">Distribution</p>
@@ -76,7 +74,6 @@ export default function TokenPageClient() {
         </FadeIn>
       </section>
 
-      {/* Take part */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h2 className="text-3xl font-black tracking-tight sm:text-4xl">Take part</h2>
@@ -104,7 +101,6 @@ export default function TokenPageClient() {
         </FadeIn>
       </section>
 
-      {/* Where to get MDLN */}
       <section className="px-4 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h2 className="mb-6 text-3xl font-black tracking-tight sm:text-4xl">Where to get MDLN</h2>
@@ -125,7 +121,6 @@ export default function TokenPageClient() {
         </FadeIn>
       </section>
 
-      {/* Contracts */}
       <section className="px-4 pb-8 sm:px-6 lg:px-10 xl:px-14">
         <FadeIn className="max-w-3xl">
           <h2 className="mb-4 text-3xl font-black tracking-tight sm:text-4xl">Contracts</h2>
